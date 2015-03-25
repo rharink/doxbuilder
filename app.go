@@ -32,11 +32,11 @@ func (app *App) VersionAction(res http.ResponseWriter, req *http.Request) {
 func (app *App) ConvertAction(res http.ResponseWriter, req *http.Request) {
 	// Handle incoming file (upload)
 	file, _, err := req.FormFile("file")
-	defer file.Close()
 	if err != nil {
 		app.Render.JSON(res, 400, "No file found in request.")
 		return
 	}
+	defer file.Close()
 	tempName := fmt.Sprintf("%d-document", time.Now().Unix())
 
 	// Save contents to tempfile
